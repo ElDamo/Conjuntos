@@ -233,6 +233,28 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
 
         return nuevo;
     }
+    
+    public boolean equals(ConjuntoADT<T> otro){
+        boolean resp=true;
+        if(this!=otro){
+            if(otro != null){
+          if(cardinalidad == otro.getCardinalidad()){
+              int i=0;
+              while(i<cardinalidad && !resp){
+                  if(otro.contains(conjunto[i]))
+                      i++;
+                  else
+                      resp=false;
+              }
+          }
+          else
+              resp=false;
+        }
+        else
+            resp=false;   
+        }
+        return resp;
+    }
 
 
 
