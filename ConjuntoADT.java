@@ -14,6 +14,10 @@ package ejercicio.pkg10;
 
 import java.util.Iterator;
 
+import java.util.NoSuchElementException;
+
+
+
 
 
 /**
@@ -24,28 +28,58 @@ import java.util.Iterator;
 
  */
 
-public interface ConjuntoADT<T> extends Iterable<T>{
+public class IteradorArreglo <T> implements Iterator <T>{
 
-    public boolean contains(T dato);
+    private T[] coleccion;
 
-    public boolean estaVacio();
+    private int total;
 
-    public boolean agrega(T dato);
+    private int actual;
 
-    public T quita(T dato);
+    
 
-    public int getCardinalidad();
+    public IteradorArreglo(T[] coleccion, int total){
 
-    public ConjuntoADT <T> union (ConjuntoADT<T> otro);
+        this.coleccion=coleccion;
 
-    public ConjuntoADT <T> interseccion (ConjuntoADT<T> otro);
+        this.total=total;
 
-    public Iterator <T> iterator();
+        this.actual=0;
 
-    public String toString();
+    }
 
-    public ConjuntoADT<T> diferencia(ConjuntoADT<T> otro);
+        public boolean hasNext(){
 
-    public boolean equals(ConjuntoADT<T> otro);
+        return actual<total;
+
+    }
+
+    
+
+    public T next(){
+
+        if(hasNext()){
+
+            T resul;
+
+            resul=coleccion[actual];
+
+            actual++;
+
+            return resul;
+
+        }
+
+        else throw new NoSuchElementException();
+
+    }
+
+    
+
+    public void remove(){
+
+        throw new UnsupportedOperationException();
+
+    }
 
 }
