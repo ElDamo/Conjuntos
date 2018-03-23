@@ -236,7 +236,7 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
     
     public boolean equals(ConjuntoADT<T> otro){
         boolean resp=true;
-        if(this!=otro){
+        if(this!=otro || (cardinalidad==0 && otro.getCardinalidad()==0)){
             if(otro != null){
           if(cardinalidad == otro.getCardinalidad()){
               int i=0;
@@ -255,7 +255,33 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         }
         return resp;
     }
-
-
-
+    
+    public ConjuntoADT <T> interseccionr (ConjuntoADT<T> otro){
+        ConjuntoADT<T> nuevo = new ConjuntoA(otro.getCardinalidad());
+        Iterator<T> it= otro.iterator();
+        return interseccionr(nuevo);
+    }
+    
+    public ConjuntoADT <T> unionr (ConjuntoADT<T> otro){
+        ConjuntoADT<T> nuevo = null;
+        if(otro!=null){
+            nuevo= new ConjuntoA();
+            unionr(nuevo,iterator());
+            unionr(nuevo,otro.iterator());
+        }
+        return nuevo;
+    }
+    
+    public void unionr (ConjuntoADT<T> otro,Iterator<T> it){
+        if(it.hasNext()){
+            otro.agrega(it.next());
+            unionr(otro, it);
+        }
+    }
+        
+    public ConjuntoADT <T> diferenciar (ConjuntoADT<T> otro){
+        ConjuntoADT<T> nuevo = new ConjuntoA(otro.getCardinalidad());
+        Iterator<T> it= otro.iterator();
+        return interseccionr(nuevo);
+    }
 }
