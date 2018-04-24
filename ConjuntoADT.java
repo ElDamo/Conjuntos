@@ -14,10 +14,6 @@ package ejercicio.pkg10;
 
 import java.util.Iterator;
 
-import java.util.NoSuchElementException;
-
-
-
 
 
 /**
@@ -28,43 +24,38 @@ import java.util.NoSuchElementException;
 
  */
 
-public class IteradorArreglo <T> implements Iterator <T>{
+public interface ConjuntoADT<T> extends Iterable<T>{
 
-    private T[] coleccion;
+    public boolean contains(T dato);
 
-    private int total;
+    public boolean estaVacio();
 
-    private int actual;
+    public boolean agrega(T dato);
 
+    public T quita(T dato);
+
+    public int getCardinalidad();
+
+    public ConjuntoADT <T> union (ConjuntoADT<T> otro);
+
+    public ConjuntoADT <T> interseccion (ConjuntoADT<T> otro);
+
+    public Iterator <T> iterator();
+
+    public String toString();
+
+    public ConjuntoADT<T> diferencia(ConjuntoADT<T> otro);
+
+    public boolean equals(ConjuntoADT<T> otro);
+    
+    public ConjuntoADT <T> unionr (ConjuntoADT<T> otro);
+
+    public ConjuntoADT <T> interseccionr (ConjuntoADT<T> otro);
+    
+    public ConjuntoADT<T> diferenciar(ConjuntoADT<T> otro);
     
 
-    public IteradorArreglo(T[] coleccion, int total){
-
-        this.coleccion=coleccion;
-
-        this.total=total;
-
-        this.actual=0;
-
-    }
-
-        public boolean hasNext(){
-
-        return actual<total;
-
-    }
-
-    
-
-    public T next(){
-
-        if(hasNext()){
-
-            T resul;
-
-            resul=coleccion[actual];
-
-            actual++;
+}
 
             return resul;
 
