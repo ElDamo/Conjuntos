@@ -272,7 +272,7 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         return nuevo;
     }
     
-    public void unionr (ConjuntoADT<T> otro,Iterator<T> it){
+    private void unionr (ConjuntoADT<T> otro,Iterator<T> it){
         if(it.hasNext()){
             otro.agrega(it.next());
             unionr(otro, it);
@@ -281,7 +281,18 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         
     public ConjuntoADT <T> diferenciar (ConjuntoADT<T> otro){
         ConjuntoADT<T> nuevo = new ConjuntoA(otro.getCardinalidad());
-        Iterator<T> it= otro.iterator();
-        return interseccionr(nuevo);
+        return diferenciar(otro, nuevo,0);
+    }
+    
+    private ConjuntoADT <T> diferenciar (ConjuntoADT<T> otro, ConjuntoADT <T> nuevo, int i){
+        if(i==this.getCardinalidad()){
+            return nuevo;
+        }
+        else{
+            if(!otro.contains(conjunto[i])){
+                nuevo.agrega(conjunto[i]);
+            }
+        }
+        return diferenciar(otro,nuevo,i+1);
     }
 }
